@@ -598,7 +598,7 @@ Top recommendations include:
 - Lacks fine-grained contextual understanding
 
 
-## Final Feature Hierarchy
+### Final Feature Hierarchy
 
 Feature       | Behavior                  | Quality
 -------------|---------------------------|---------
@@ -606,4 +606,39 @@ Title        | keyword overlap           | Weak
 Genre        | category matching         | Medium
 Description  | contextual similarity     | Strong
 
+
+---
+
+## 🧪 Experiment — Combined Feature System
+
+### Change
+- Combined title, genre, and description into single feature
+
+### Input
+- "Inception"
+
+### Observation
+- Non-zero similarity scores (~0.13–0.15)
+- Recommendations include sci-fi, thriller, and concept-based films
+- Results more relevant compared to individual features
+
+### Analysis
+- Description drives semantic similarity
+- Genre ensures category alignment
+- Title provides minor keyword support
+
+### Conclusion
+- Combined features produce more balanced and meaningful recommendations
+- Reduces weaknesses of individual features
+- Improves overall system stability
+
+### Feature Contribution
+
+Feature       | Role
+-------------|-------------------------
+Title        | weak signal booster
+Genre        | category anchor
+Description  | main semantic driver
+
+**Better features > better models**
 
