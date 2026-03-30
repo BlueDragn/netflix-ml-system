@@ -11,10 +11,10 @@ def build_features(df):
 
 
     #title = df["title"].str.strip().str.lower().astype('string')
-    genres = df["listed_in"].str.strip().str.lower().astype('string')
-    #description = df["description"].str.strip().str.lower().astype('string')
+    #genres = df["listed_in"].str.strip().str.lower().astype('string')
+    description = df["description"].str.strip().str.lower().astype('string')
 
-    combined_text = genres
+    combined_text = description
 
 
 

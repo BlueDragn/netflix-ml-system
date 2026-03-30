@@ -29,14 +29,17 @@ def recommend(df, sim_matrix, title):
     print("\n=== INPUT ===")
     print("Title:", df.iloc[idx]["title"])
     print("Genre:", df.iloc[idx]["listed_in"])
-    #print("Description:", df.iloc[idx]["description"])
+    print("Description:", df.iloc[idx]["description"])
     print("=== END INPUT ===\n")
 
 
 
     scores = sim_matrix[idx]
-    indices = np.argsort(scores)
-    top_indices = indices[::1][1:11]
+    #debug
+    print("IDX:", idx)
+    print("Score sample:", sim_matrix[idx][:10])
+    indices = np.argsort(scores)[::-1]
+    top_indices = indices[1:11]
 
     results = []
 
@@ -46,7 +49,8 @@ def recommend(df, sim_matrix, title):
         results.append({
             "title": df.iloc[i]["title"],
             "genre": df.iloc[i]["listed_in"],
-            "score": scores[i],
+            "description": df.iloc[i]["description"],
+            "score": float(scores[i])
 
         })
 
