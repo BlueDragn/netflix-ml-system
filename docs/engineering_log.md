@@ -552,5 +552,22 @@ Top recommendations include:
 > Meaningful similarity emerges when feature representation captures sufficient context and vocabulary overlap.
 
 
+---
+## Experiment - Title feature Re-check (After Fix)
 
+### Changes
+- Fixed Score computation issue
+
+### Input
+- "Bird Box"
+- "Love"
+- "Inception"
+
+### Observation
+- Both "Bird Box" and "Love" -> multiple matches with non- zero score
+- "Inception" -> no matches, score almost zero
+
+### Conclusion
+- Title similarity depends on token overlap
+- Works for common words, fails for unique titles
 

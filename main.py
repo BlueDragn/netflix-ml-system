@@ -34,6 +34,7 @@ def main():
     sim_matrix = compute_similarity(tfidf_matrix)
 
     #Debug
+
     print(sim_matrix[0][1])
     print(sim_matrix[0][2])
     print(sim_matrix[10][20])
@@ -41,7 +42,7 @@ def main():
     print(sim_matrix.max())
 
     #5. Recommend
-    title = "Bird Box"
+    title = "Inception"
     recommendations = recommend(df, sim_matrix, title)
 
 
