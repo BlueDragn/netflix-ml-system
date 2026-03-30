@@ -571,3 +571,39 @@ Top recommendations include:
 - Title similarity depends on token overlap
 - Works for common words, fails for unique titles
 
+---
+
+## 🧪 Experiment — Genre Feature Recheck (After Fix)
+
+### Change
+- Modified combined_text to include only genre (`listed_in`)
+
+### Input
+- "Inception"
+
+### Observation
+- High similarity scores (~0.92)
+- Recommendations mostly belong to:
+  - Action & Adventure
+  - Sci-Fi & Fantasy
+
+### Analysis
+- Genre labels are repeated across multiple items
+- TF-IDF captures strong overlap due to identical tokens
+- Results show clustering based on category similarity
+
+### Conclusion
+- Genre feature provides strong but coarse similarity
+- Effective for grouping items by category
+- Lacks fine-grained contextual understanding
+
+
+## Final Feature Hierarchy
+
+Feature       | Behavior                  | Quality
+-------------|---------------------------|---------
+Title        | keyword overlap           | Weak
+Genre        | category matching         | Medium
+Description  | contextual similarity     | Strong
+
+
