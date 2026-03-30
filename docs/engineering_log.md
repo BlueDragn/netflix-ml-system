@@ -333,3 +333,104 @@ Test impact of using **title-only feature** on recommendation quality
 ## 🔁 Next Step  
 
 Test `description` as primary feature and compare results
+
+---
+
+## 🎯 Task  
+Evaluate effectiveness of **genre-only feature** for content-based recommendation
+
+---
+
+## ⚙️ Change Made  
+- Modified `combined_text` to include only `listed_in` (genre)  
+- Removed `title` and `description` from feature set  
+- Cleaned and lowercased genre text  
+
+---
+
+## 🧪 Experiment  
+**Input:** "Bird Box"  
+
+---
+
+## 📊 Result  
+- All similarity scores = 0.0  
+- Recommendations appear unrelated (anime, kids TV, comedy, etc.)
+
+---
+
+## 🔍 Observation  
+- Input genres: `dramas, sci-fi & fantasy, thrillers`  
+- Output genres do not overlap with input genres  
+- No shared tokens between input and recommended items  
+
+---
+
+## 🧠 Analysis  
+
+### 1. Sparse Vocabulary Overlap  
+- Genre categories differ across items  
+- Example:  
+  - Input → "thrillers"  
+  - Other items → "horror movies"  
+- No exact token match → similarity = 0  
+
+---
+
+### 2. Inconsistent Genre Representation  
+- Same concept represented differently:  
+  - "dramas" vs "drama"  
+  - "thrillers" vs "thriller"  
+- No normalization applied → treated as different tokens  
+
+---
+
+### 3. Lack of Semantic Understanding  
+- TF-IDF relies on exact word matching  
+- Cannot capture relationships like:  
+  - thriller ≈ horror  
+  - sci-fi ≈ fantasy  
+
+---
+
+### 4. Limited Feature Depth  
+- Genre provides only high-level categorization  
+- Lacks detailed descriptive information  
+
+---
+
+## ⚠️ Issues Identified  
+
+- Zero similarity due to lack of token overlap  
+- Genre labels are inconsistent across dataset  
+- No preprocessing for normalization (stemming/standardization)  
+- Weak similarity signal despite structured feature  
+
+---
+
+## 🧠 Key Learnings  
+
+- Structured features alone are not sufficient without normalization  
+- TF-IDF fails when vocabulary is inconsistent  
+- Exact matching is a major limitation in category-based features  
+- Feature representation quality directly impacts similarity  
+
+---
+
+## ✅ Decision  
+
+- [x] Genre-only feature is insufficient for reliable recommendations  
+- [x] Do not use genre as standalone feature  
+- [x] Use genre as **supporting feature in combination**  
+
+---
+
+## 🔁 Next Step  
+
+- Test **description-only feature**  
+- Later combine: `description + genre + title (weighted)`
+
+
+
+
+

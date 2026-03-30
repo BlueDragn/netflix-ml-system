@@ -15,23 +15,26 @@ def main():
     #1. Load data
     df = load_data()
 
-    #Debug: check titles containing "love"
-    matches = df[df["title"].str.contains("The Dark Knight", case=False, na=False)]
-    print(matches[["title"]].head(20))
 
-    print(df[df["title"].str.contains("dark", case=False, na=False)])
+
+
 
     #2. Build features
     df = build_features(df)
+    print(df[["title", "listed_in", "description", "combined_text"]].head(10))
 
     #3. Vectorize
     tfidf_matrix, vectorizer = vectorize(df)
+
+    print("TF-IDF Matrix shape:", tfidf_matrix.shape)
+    print(vectorizer.get_feature_names_out()[:20])
+
 
     #4. Compute similarity
     sim_matrix = compute_similarity(tfidf_matrix)
 
     #5. Recommend
-    title = "The Dark Knight"
+    title = "Bird Box"
     recommendations = recommend(df, sim_matrix, title)
 
 

@@ -9,7 +9,6 @@ def find_index(df, title):
 
     if result.empty:
         print("No match found for title:", title)
-        print(df[df["title"].str.contains(title, case=False, na=False)][["title"]].head(20))
         return None
 
     if len(result) > 1:
@@ -30,7 +29,7 @@ def recommend(df, sim_matrix, title):
     print("\n=== INPUT ===")
     print("Title:", df.iloc[idx]["title"])
     print("Genre:", df.iloc[idx]["listed_in"])
-    print("Description:", df.iloc[idx]["description"])
+    #print("Description:", df.iloc[idx]["description"])
     print("=== END INPUT ===\n")
 
 
@@ -47,7 +46,6 @@ def recommend(df, sim_matrix, title):
         results.append({
             "title": df.iloc[i]["title"],
             "genre": df.iloc[i]["listed_in"],
-            "description": df.iloc[i]["description"],
             "score": scores[i],
 
         })
