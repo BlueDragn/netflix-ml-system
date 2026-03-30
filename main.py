@@ -15,6 +15,12 @@ def main():
     #1. Load data
     df = load_data()
 
+    #Debug: check titles containing "love"
+    matches = df[df["title"].str.contains("The Dark Knight", case=False, na=False)]
+    print(matches[["title"]].head(20))
+
+    print(df[df["title"].str.contains("dark", case=False, na=False)])
+
     #2. Build features
     df = build_features(df)
 
@@ -25,12 +31,13 @@ def main():
     sim_matrix = compute_similarity(tfidf_matrix)
 
     #5. Recommend
-    title = "Inception"
+    title = "The Dark Knight"
     recommendations = recommend(df, sim_matrix, title)
 
 
     #6. Output results
-    print("n\Top Recommendations:")
+    print("Your input movie:", title)
+    print("Top Recommendations:")
 
     for i, movie in enumerate(recommendations, start=1):
         print(f"{i}. {movie}")

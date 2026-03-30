@@ -234,3 +234,102 @@ Freeze v1 baseline
 
 Working baseline complete.  
 Next phase: improve system quality.
+
+-------
+-------
+
+
+
+
+# Experiments/ Tests
+## March 30, 2026
+
+---
+
+## 🎯 Task  
+Test impact of using **title-only feature** on recommendation quality
+
+---
+
+## ⚙️ Change Made  
+- Modified `combined_text` to include only `title`  
+- Removed `genre` and `description` from feature set  
+
+---
+
+## 🧪 Experiment 1  
+**Input:** "Inception"  
+
+### Result  
+- All similarity scores = 0.0  
+- Output recommendations appear random  
+
+### Observation  
+- No overlap between "Inception" and other titles  
+
+### Insight  
+- Unique titles produce zero similarity  
+- Title alone does not provide shared features  
+
+---
+
+## 🧪 Experiment 2  
+**Input:** "Love"  
+
+### Result  
+- Multiple titles contain "love"  
+- Still similarity scores ≈ 0.0  
+
+### Observation  
+- Word overlap exists but has negligible effect  
+
+### Insight  
+- TF-IDF downweights common words  
+- Common words do not contribute meaningfully  
+
+---
+
+## 🧪 Experiment 3  
+**Input:** "The Dark Knight"  
+
+### Result  
+- Movie not found in dataset  
+
+### Observation  
+- Input not present in dataset  
+
+### Insight  
+- System depends entirely on dataset  
+- No handling for external/unavailable input  
+
+---
+
+## ⚠️ Issues Noted  
+
+- Title feature too weak for similarity  
+- Common words ineffective due to TF-IDF  
+- System fails when input not in dataset  
+- Output becomes random when scores are equal  
+
+---
+
+## 🧠 Key Learnings  
+
+- Feature quality directly impacts similarity  
+- TF-IDF relies on distinctive words  
+- Title-only representation is insufficient  
+- Input validation and matching are critical  
+
+---
+
+## ✅ Decision  
+
+- [x] Do not use title-only as final feature  
+- [x] Move to testing description-only  
+- [x] Later combine features with weighting  
+
+---
+
+## 🔁 Next Step  
+
+Test `description` as primary feature and compare results
