@@ -8,51 +8,25 @@ def find_index(df, title):
     result =  df[df["title"].str.contains(title, case=False, na=False)]
 
     if result.empty:
-        print("No match found for title:", title)
         return None
-
-    if len(result) > 1:
-        print("Multiple matches found for title:", title)
-        print(result[["title"]].head(20))
 
     return result.index[0]
 
 
 
-def recommend(df, sim_matrix, title):
+def recommend(df, sim_matrix, title, top_n=10):
     idx = find_index(df, title)
 
     if idx is None:
-        return ["Movie not found in dataset"]
-
-    #INPUT DEBUG
-    print("\n=== INPUT ===")
-    print("Title:", df.iloc[idx]["title"])
-    print("Genre:", df.iloc[idx]["listed_in"])
-    print("Description:", df.iloc[idx]["description"])
-    print("=== END INPUT ===\n")
-
+        return []
 
 
     scores = sim_matrix[idx]
-    #debug
-    print("IDX:", idx)
-    print("Score sample:", sim_matrix[idx][:10])
+
     indices = np.argsort(scores)[::-1]
-    top_indices = indices[1:11]
+    top_indices = indices[1:1 + top_n]
 
-    results = []
 
-    print("\n=== RECOMMENDATIONS DEBUG ===")
 
-    for i in top_indices:
-        results.append({
-            "title": df.iloc[i]["title"],
-            "genre": df.iloc[i]["listed_in"],
-            "description": df.iloc[i]["description"],
-            "score": float(scores[i])
-
-        })
-
-    return results
+    return df.iloc[top_indices]["title"].tolist()
 

@@ -10,7 +10,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 
 def vectorize(df):
     text_data = df["combined_text"]
-    vectorizer = TfidfVectorizer()
+    vectorizer = TfidfVectorizer( stop_words="english")
     tfidf_matrix = vectorizer.fit_transform(text_data)
     return tfidf_matrix, vectorizer
 

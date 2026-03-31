@@ -15,31 +15,17 @@ def main():
     #1. Load data
     df = load_data()
 
-
-
-
-
     #2. Build features
     df = build_features(df)
-    print(df[["title", "listed_in", "description", "combined_text"]].head(10))
+
 
     #3. Vectorize
-    tfidf_matrix, vectorizer = vectorize(df)
-
-    print("TF-IDF Matrix shape:", tfidf_matrix.shape)
-    print(vectorizer.get_feature_names_out()[:20])
+    tfidf_matrix, _ = vectorize(df)
 
 
     #4. Compute similarity
     sim_matrix = compute_similarity(tfidf_matrix)
 
-    #Debug
-
-    print(sim_matrix[0][1])
-    print(sim_matrix[0][2])
-    print(sim_matrix[10][20])
-    print(sim_matrix[0][0])
-    print(sim_matrix.max())
 
     #5. Recommend
     title = "Inception"
@@ -47,8 +33,8 @@ def main():
 
 
     #6. Output results
-    print("Your input movie:", title)
-    print("Top Recommendations:")
+    print(f"Recommendations for '{title}':")
+    print("\nTop Recommendations:\n")
 
     for i, movie in enumerate(recommendations, start=1):
         print(f"{i}. {movie}")
