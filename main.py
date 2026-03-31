@@ -7,7 +7,7 @@ Entry point:
 
 from src.data_loader import load_data
 from src.feature_builder import build_features
-from src.vectorizer import vectorize
+from src.vectorizer import apply_weights, vectorize
 from src.similarity import compute_similarity
 from src.recommender import recommend
 
@@ -20,15 +20,16 @@ def main():
 
 
     #3. Vectorize
-    tfidf_matrix, _ = vectorize(df)
+    title_vec, genres_vec, desc_vec = vectorize(df)
 
 
     #4. Compute similarity
-    sim_matrix = compute_similarity(tfidf_matrix)
+    final_matrix = apply_weights(title_vec, genres_vec, desc_vec)
+    sim_matrix = compute_similarity(final_matrix)
 
 
     #5. Recommend
-    title = "Inception"
+    title = "Bird Box"
     recommendations = recommend(df, sim_matrix, title)
 
 
