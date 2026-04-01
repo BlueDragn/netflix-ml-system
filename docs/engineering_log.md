@@ -641,4 +641,202 @@ Genre        | category anchor
 Description  | main semantic driver
 
 **Better features > better models**
+----
+---
 
+
+
+## Date: 31 March 2026
+
+-----
+
+## Objective
+
+Implement feature weighting in a TF-IDF based recommendation system.
+
+-----
+
+## Work Done
+
+### Pipeline Refactoring
+
+Refactored pipeline into modular components:
+
+- `data_loader`
+- `feature_builder`
+- `vectorizer`
+- `similarity`
+- `recommender`
+
+### Vector Architecture
+
+Transitioned from a single `combined_text` vector to separate vectors:
+
+- `title`
+- `genre`
+- `description`
+
+### Feature Weighting Implementation
+
+```python
+final_matrix = hstack([
+    w_title * title_vec,
+    w_genre * genre_vec,
+    w_desc  * desc_vec
+])
+```
+
+-----
+
+## Issues & Fixes
+
+### 1. Inconsistent Shapes Error
+
+- **Cause:** Tried adding vectors from different vocabularies
+- **Fix:** Used `hstack` for concatenation instead of addition
+
+### 2. Index Handling Bug
+
+- **Error:** `'int' object has no attribute 'empty'`
+- **Fix:** Corrected `find_index()` logic
+
+### 3. File Path Issue
+
+- **Fix:** Corrected dataset loading path
+
+-----
+
+## Key Learnings
+
+- Separate vectorization creates independent feature spaces
+- Feature weighting must be applied via concatenation, not addition
+- Sparse matrix operations require shape alignment
+- Debugging requires checking types and data flow at each stage
+
+-----
+
+## System Status
+
+|Component              |Status              |
+|-----------------------|--------------------|
+|Feature-weighted system|Implemented         |
+|System runtime         |Passing             |
+|Output quality         |Noisy — needs tuning|
+
+-----
+
+## Next Steps
+
+Run controlled experiments on feature weight configurations:
+
+```
+(w_title, w_genre, w_desc)
+
+(1, 1, 1)
+(2, 2, 1)
+(3, 1, 1)
+(1, 3, 1)
+```
+
+-----
+
+## Summary
+
+Shifted from a single TF-IDF representation to a weighted multi-feature vector system. Resolved dimensional mismatches and index handling bugs along the way. Next focus is weight tuning via controlled experiments.
+
+
+## Date: 1 April 2026
+
+---
+
+## 🎯 Objective
+Evaluate impact of feature weighting on recommendation quality.
+
+---
+
+## 🧪 Experiments Conducted
+
+Test Titles:
+- Inception
+- Bird Box
+
+Weight Configurations:
+- A → (1,1,1)
+- B → (2,2,1)
+- C → (3,1,1)
+- D → (1,3,1)
+
+---
+
+## 📊 Results
+
+### 🎬 Bird Box
+
+| Weights | Observation |
+|--------|------------|
+| (1,1,1) | Mixed results, moderate noise |
+| (2,2,1) | Slight improvement, still noisy |
+| (3,1,1) | Poor — title keyword “bird” dominates |
+| (1,3,1) | Strong genre clustering, more relevant |
+
+---
+
+### 🎬 Inception
+
+| Weights | Observation |
+|--------|------------|
+| (1,1,1) | Noisy results (“next”, “9”) |
+| (2,2,1) | Improved, includes sci-fi movies |
+| (3,1,1) | Weak, unstable recommendations |
+| (1,3,1) | Best — consistent sci-fi matches |
+
+---
+
+## 🧠 Key Insights
+
+- Title-heavy weighting causes keyword overfitting  
+- Genre provides strongest and most stable signal  
+- Balanced weights improve stability but not optimal  
+- Description signal currently underutilized  
+
+---
+
+## ✅ Final Decision
+
+Selected weights:(1,3,1)
+
+Reason:
+- Best balance of relevance and stability  
+- Reduces noise compared to baseline  
+- Produces consistent genre-aligned recommendations  
+
+---
+
+## ⚠️ Observed Limitation
+
+- Presence of noisy recommendations (e.g., “next”, “9”)  
+- Indicates weak filtering in TF-IDF representation  
+
+---
+
+## 📊 System Status
+
+✔ Feature weighting implemented  
+✔ Experiments completed  
+✔ Best configuration selected  
+⚠ Output quality still needs refinement  
+
+---
+
+## 🚀 Next Step
+
+Refine TF-IDF:
+- remove stopwords  
+- limit vocabulary  
+- reduce noise  
+
+---
+
+## ⚡ Summary
+
+Feature weighting improves recommendation quality, with genre emerging as the dominant signal, but TF-IDF noise still limits performance.

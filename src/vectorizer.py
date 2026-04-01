@@ -18,7 +18,7 @@ def vectorize(df):
 
     return title_vec, genres_vec, desc_vec
 
-def apply_weights(title_vec, genres_vec, desc_vec, w_title=1, w_genres=1, w_desc=1):
+def apply_weights(title_vec, genres_vec, desc_vec, w_title=1, w_genres=3, w_desc=1):
 
 
     final_matrix = hstack([

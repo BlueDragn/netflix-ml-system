@@ -29,7 +29,7 @@ def main():
 
 
     #5. Recommend
-    title = "Bird Box"
+    title = "Inception"
     recommendations = recommend(df, sim_matrix, title)
 
 
