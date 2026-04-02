@@ -922,3 +922,109 @@ TfidfVectorizer(
     stop_words='english',
     max_features=5000
 )
+```
+---
+
+## Evaluation Phase
+---
+## 🎯 Objective
+Evaluate recommendation quality using a structured scoring framework.
+
+
+
+## ✅ Work Done
+
+### 1. Evaluation Framework Design
+
+- Defined relevance scoring system:
+
+| Score | Meaning |
+|------|--------|
+| 2 | Highly relevant (genre + theme match) |
+| 1 | Partially relevant |
+| 0 | Irrelevant |
+
+- Evaluated using **Top-5 recommendations**
+
+---
+
+### 2. Output Improvement
+
+- Updated system to print:
+  - title
+  - genre
+  - description (truncated)
+
+- Ensured evaluation uses same features as model input
+
+---
+
+### 3. Evaluation Results
+
+#### 🔹 Bird Box
+
+| Movie | Score |
+|------|------|
+| the box | 1 |
+| anon | 2 |
+| selfless | 1 |
+| transcendence | 2 |
+| prospect | 1 |
+
+**Average Score: 1.4**
+
+---
+
+#### 🔹 Inception
+
+| Movie | Score |
+|------|------|
+| spectral | 1 |
+| chappie | 1 |
+| next | 1 |
+| beowulf | 0 |
+| occupation | 1 |
+
+**Average Score: 0.8**
+
+---
+
+### 4. Final System Score
+
+Final Score = (1.4 + 0.8) / 2 = 1.1
+## 🧠 Key Insights
+
+- System performs well on genre-driven inputs
+- Weak performance on conceptual/semantic inputs
+- TF-IDF captures lexical similarity, not deep meaning
+- Evaluation must align with model features (not titles only)
+
+---
+
+## ⚠️ Limitations Identified
+
+- Title-based noise still exists
+- Semantic understanding is limited
+- No true understanding of concepts (e.g., "dream", "mind")
+
+---
+
+## 📊 System Status
+
+- ✔ Evaluation framework implemented  
+- ✔ Quantitative performance measured  
+- ✔ Baseline score established (1.1)
+
+---
+
+## 🚀 Next Steps
+
+- Improve representation quality
+- Reduce lexical noise further
+- Explore semantic models (future: embeddings)
+
+---
+
+## ⚡ Summary
+
+Introduced structured evaluation, measured system performance, and established a baseline score for further improvements.
