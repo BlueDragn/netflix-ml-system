@@ -840,3 +840,85 @@ Refine TF-IDF:
 ## ⚡ Summary
 
 Feature weighting improves recommendation quality, with genre emerging as the dominant signal, but TF-IDF noise still limits performance.
+
+---
+
+
+## Date: 2 April 2026
+---
+
+## 🎯 Objective
+Improve recommendation quality by refining TF-IDF representation and validating configurations.
+
+---
+
+## ✅ Work Done
+
+### 1. TF-IDF Refinement
+
+- Added stopwords removal:
+  - `stop_words='english'`
+- Limited vocabulary size:
+  - `max_features=5000`
+
+---
+
+### 2. Experiments Conducted
+
+Tested multiple TF-IDF configurations:
+
+| Experiment | Configuration | Observation |
+|-----------|-------------|------------|
+| A | stop_words | Reduced basic noise, but weak results |
+| B | stop_words + max_features | Significant improvement in relevance |
+| C | + ngrams | Increased sparsity, unstable results |
+| D | + max_df | No significant improvement |
+
+---
+
+### 3. Feature Weight Validation
+
+Tested weight combinations:
+
+| Weights (title, genre, description) | Observation |
+|-----------------------------------|------------|
+| (1,1,1) | Balanced but weak signal |
+| (2,2,1) | Over-amplified title/genre |
+| (3,1,1) | Title bias increased |
+| (1,3,1) | Best performance (genre dominant) |
+| (0.5,3,1) | No meaningful improvement |
+
+---
+
+### 4. Generalization Testing
+
+Validated system on multiple inputs:
+
+- Inception ✔  
+- Bird Box ✔  
+
+Observations:
+- Consistent sci-fi / dystopian clustering
+- Reduced random/noisy outputs
+- Stable ranking across inputs
+
+---
+
+## 🧠 Key Learnings
+
+- Feature representation has more impact than model complexity
+- stop_words removes common noise
+- max_features removes weak/rare signals
+- ngrams can hurt performance on small datasets
+- Not all hyperparameters improve results
+- Empirical validation is required for tuning decisions
+
+---
+
+## 📊 Final Configuration
+
+```python
+TfidfVectorizer(
+    stop_words='english',
+    max_features=5000
+)
