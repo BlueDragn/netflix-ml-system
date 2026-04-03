@@ -1028,3 +1028,73 @@ Final Score = (1.4 + 0.8) / 2 = 1.1
 ## ⚡ Summary
 
 Introduced structured evaluation, measured system performance, and established a baseline score for further improvements.
+
+---
+
+## Date: 3 April 2026
+
+---
+
+## 🎯 Objective
+Improve recommendation quality by reducing noise using post-filtering.
+
+---
+
+## ✅ Work Done
+
+- Implemented genre-based post-filtering in recommendation pipeline
+- Expanded candidate pool from top 10 → top 20 before filtering
+- Filter logic:
+  - Keep only movies sharing at least one genre with input
+- Integrated filtering inside recommender module
+- Updated output to display readable results (title + genre + description)
+- Fixed printing issue (removed index-only output)
+
+---
+
+## 🐞 Issues & Fixes
+
+1. NoneType Error
+   - Cause: Variable overwrite in main
+   - Fix: Removed duplicate assignment, ensured consistent variable usage
+
+2. Incorrect Output Display
+   - Cause: Printing dataset indices instead of movie details
+   - Fix: Updated print logic to show actual movie information
+
+---
+
+## 📊 Results
+
+- Significant reduction in irrelevant recommendations
+- Improved genre consistency in output
+- Cleaner and more interpretable results
+
+Example improvement:
+
+- Reduced irrelevant recommendation by filtering based on genre overlap
+- Removed unrelated items that do not share dataset-defined genres  
+(e.g with input title: "Bird Box", recommended fantasy items without genre match)
+
+---
+
+## 🧠 Key Learnings
+
+- Model output must be controlled via system-level logic
+- Post-processing is essential in recommendation systems
+- Debugging pipeline flow is critical for stability
+- Clean output is necessary for evaluation
+
+---
+
+## 🚀 Next Step
+
+- Finalize project
+- Clean codebase
+- Merge into main branch
+
+---
+
+## ⚡ Summary
+
+Enhanced recommendation system by introducing genre-based filtering, improving output quality and system robustness.
