@@ -1,6 +1,4 @@
-'''
-Create combined_text column
-'''
+
 
 
 def build_features(df):

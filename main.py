@@ -30,7 +30,7 @@ def main():
 
 
     #5. Recommend
-    title = "Inception"
+    title = "Bird Box"
     idx= find_index(df, title)
     top_indices = recommend(df, sim_matrix, title)
 

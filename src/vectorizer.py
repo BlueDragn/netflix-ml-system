@@ -10,11 +10,13 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from scipy.sparse import hstack
 
 def vectorize(df):
-    vectorizer = TfidfVectorizer(stop_words='english', max_features=5000)
+    title_vectorizer = TfidfVectorizer(stop_words='english', max_features=5000)
+    genres_vectorizer = TfidfVectorizer(stop_words='english', max_features=5000)
+    desc_vectorizer = TfidfVectorizer(stop_words='english', max_features=5000)
 
-    title_vec = vectorizer.fit_transform(df["title"])
-    genres_vec = vectorizer.fit_transform(df["listed_in"])
-    desc_vec = vectorizer.fit_transform(df["description"])
+    title_vec = title_vectorizer.fit_transform(df["title"])
+    genres_vec = genres_vectorizer.fit_transform(df["listed_in"])
+    desc_vec = desc_vectorizer.fit_transform(df["description"])
 
     return title_vec, genres_vec, desc_vec
 
