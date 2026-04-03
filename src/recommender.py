@@ -14,7 +14,7 @@ def find_index(df, title):
 
 
 
-def recommend(df, sim_matrix, title, top_n=10):
+def recommend(df, sim_matrix, title, top_n=20):
     idx = find_index(df, title)
 
     if idx is None:
@@ -24,9 +24,16 @@ def recommend(df, sim_matrix, title, top_n=10):
     scores = sim_matrix[idx]
 
     indices = np.argsort(scores)[::-1]
-    top_indices = indices[1:1 + top_n]
+    top_indices = indices[1: top_n + 1]
+
+    input_genres = set(df.iloc[idx]["listed_in"].split(", "))
+    filtered_indices = []
+    for i in top_indices:
+        movie_genres = set(df.iloc[i]["listed_in"].split(", "))
+        if len(input_genres.intersection(movie_genres)) > 0:
+            filtered_indices.append(i)
+
+    return  filtered_indices[:top_n]
 
 
-
-    return df.iloc[top_indices]["title"].tolist()
 
